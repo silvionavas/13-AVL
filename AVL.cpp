@@ -206,14 +206,40 @@ NO* insereArvore(NO* no, int valor)
 
 NO* girarDireita(NO* no)
 {
-	// sua implementação vai aqui
-	return no;
+	// O nó esquerdo de 'no' será a nova raiz da subárvore
+	NO* novoNo = no->esq;
+
+	// O nó esquerdo de 'novoNo' (se existir) se torna o nó direito de 'no'
+	no->esq = novoNo->dir;
+
+	// O 'novoNo' se torna o novo pai de 'no'
+	novoNo->dir = no;
+
+	// Atualiza as alturas dos nós
+	no->altura = max(alturaNo(no->esq), alturaNo(no->dir)) + 1;
+	novoNo->altura = max(alturaNo(novoNo->esq), alturaNo(novoNo->dir)) + 1;
+
+	// Retorna o novo nó, que agora é a raiz da subárvore balanceada
+	return novoNo;
 }
 
 NO* girarEsquerda(NO* no)
 {
-	// sua implementação vai aqui
-	return no;
+	// O nó direito de 'no' será a nova raiz da subárvore
+	NO* novoNo = no->dir;
+
+	// O nó direito de 'novoNo' (se existir) se torna o nó esquerdo de 'no'
+	no->dir = novoNo->esq;
+
+	// O 'novoNo' se torna o novo pai de 'no'
+	novoNo->esq = no;
+
+	// Atualiza as alturas dos nós
+	no->altura = max(alturaNo(no->esq), alturaNo(no->dir)) + 1;
+	novoNo->altura = max(alturaNo(novoNo->esq), alturaNo(novoNo->dir)) + 1;
+
+	// Retorna o novo nó, que agora é a raiz da subárvore balanceada
+	return novoNo;
 }
 
 int elementosArvore(NO* no)
